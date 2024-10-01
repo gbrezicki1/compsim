@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+
+<form action="/submit" method="POST">
+    <label for="input1">Input 1:</label>
+    <input type="checkbox" id="input1" name="input1" value=<%= input1Initial %>> <br>
+    <label for="input2">Input 2:</label>
+    <input type="checkbox" id="input1" name="input1" value=<%= input2Initial %>>
+</form>
+
+<%- include('partials/footer') %>

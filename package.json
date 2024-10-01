@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is a simulation of a computer built up from logic gates.",
   "main": "app.js",
+  "type": "module",
   "directories": {
     "lib": "lib"
   },
