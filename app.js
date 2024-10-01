@@ -1,12 +1,13 @@
 import express from "express";
-//import bodyParser from "body-parser";
-//app.use(bodyParser.urlencoded({ extended: true }));
+import bodyParser from "body-parser";
 
-import { And } from "./lib/and";
+import { And } from "./lib/and.js";
 
 const app = express();
 const port = 3000;
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
     res.render("index.ejs", {
@@ -18,10 +19,12 @@ app.get("/", (req, res) => {
 
 app.post("/submit", (req,res) => {
     let and = new And();
-    and.update(input1=req.body.input1, input2=req.body.input2);
+    let input1 = req.body.input1 === "true";
+    let input2 = req.body.input2 === "true";
+    and.update(input1,input2);
     res.render("index.ejs",{
-        input1Initial: req.body.input1,
-        input2Initial: req.body.input2,
+        input1Initial: input1,
+        input2Initial: input2,
         output: and.output
     });
 });
