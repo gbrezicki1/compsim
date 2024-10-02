@@ -1,13 +1,13 @@
 <%- include('partials/header') %>
 
-<form action="/submit" method="POST">
-    <label for="input1">Input 1:</label>
-    <input type="checkbox" id="input1" name="input1" value="true" <%= input1Initial ? 'checked' : '' %>> <br>
-    <label for="input2">Input 2:</label>
-    <input type="checkbox" id="input2" name="input2" value="true" <%= input2Initial ? 'checked' : '' %>> <br>
-    <button type="submit">Update</button>
-</form> <br>
+<label for="input1">Input 1:</label>
+<input type="checkbox" id="input1" class="input-checkbox" name="input1" value="true" <%= input1Initial ? 'checked' : '' %>> <br>
+<label for="input2">Input 2:</label>
+<input type="checkbox" id="input2" class="input-checkbox" name="input2" value="true" <%= input2Initial ? 'checked' : '' %>> <br>
+<p>Output:</p>
+<p id="output"><%= output %></p>
 
-<p>Output: <%= output %></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js" charset="utf-8"></script>
 
 <%- include('partials/footer') %>
