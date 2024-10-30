@@ -1,11 +1,20 @@
 <%- include('partials/header') %>
 
-<label for="input1">Input 1:</label>
-<input type="checkbox" id="input1" class="input-checkbox" name="input1" value="true" <%= input1Initial ? 'checked' : '' %>> <br>
-<label for="input2">Input 2:</label>
-<input type="checkbox" id="input2" class="input-checkbox" name="input2" value="true" <%= input2Initial ? 'checked' : '' %>> <br>
-<p>Output:</p>
-<p id="output"><%= output %></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>And</h2>
+      <label for="andInput1">Input 1:</label>
+      <input type="checkbox" id="andInput1" class="input-checkbox"
+      name="andInput1" value="true" <%= and.input1 ? 'checked' : '' %>> <br />
+      <label for="andInput2">Input 2:</label>
+      <input type="checkbox" id="andInput2" class="input-checkbox"
+      name="andInput2" value="true" <%= and.input2 ? 'checked' : '' %>> <br />
+      <p>Output:</p>
+      <p id="andOutput"><%= and.output %></p>
+    </div>
+  </div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js" charset="utf-8"></script>
