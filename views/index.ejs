@@ -13,6 +13,17 @@
       <p>Output:</p>
       <p id="andOutput"><%= and.output %></p>
     </div>
+    <div class="col">
+      <h2>Or</h2>
+      <label for="orInput1">Input 1:</label>
+      <input type="checkbox" id="orInput1" class="input-checkbox"
+      name="orInput1" value="true" <%= or.input1 ? 'checked' : '' %>> <br />
+      <label for="orInput2">Input 2:</label>
+      <input type="checkbox" id="orInput2" class="input-checkbox"
+      name="orInput2" value="true" <%= or.input2 ? 'checked' : '' %>> <br />
+      <p>Output:</p>
+      <p id="orOutput"><%= or.output %></p>
+    </div>
   </div>
 </div>
 

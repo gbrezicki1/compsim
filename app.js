@@ -15,20 +15,17 @@ let and = new And();
 let or = new Or();
 
 app.get("/", (req, res) => {
-  //     res.render("index.ejs", {
-  //         andInput1Initial: and.input1,
-  //         andInput2Initial: and.input2,
-  //         orInput1Initial: or.input1,
-  //         orInput2Initial: or.input2,
-  //         andOutput: and.output
-  //     });
   res.render("index.ejs", {
     and: and,
+    or: or,
   });
 });
 
 app.post("/update", (req, res) => {
+  let elementID;
+  let output;
   if (req.body.input.toLowerCase().includes("and")) {
+    elementID = "#andOutput";
     if (req.body.input.toLowerCase().includes("input1")) {
       and.input1 = req.body.isChecked;
     } else if (req.body.input.toLowerCase().includes("input2")) {
@@ -36,25 +33,27 @@ app.post("/update", (req, res) => {
     } else {
       console.log(`Invalid input # for "and": ${req.body.input}`);
     }
+    and.update();
+    output = and.output;
+  } else if (req.body.input.toLowerCase().includes("or")) {
+    elementID = "#orOutput";
+    if (req.body.input.toLowerCase().includes("input1")) {
+      or.input1 = req.body.isChecked;
+    } else if (req.body.input.toLowerCase().includes("input2")) {
+      or.input2 = req.body.isChecked;
+    } else {
+      console.log(`Invalid input # for "or": ${req.body.input}`);
+    }
+    or.update();
+    output = or.output;
   } else {
     console.log("Invalid input ID.");
   }
-
-  and.update();
-  res.json({ output: and.output });
+  res.json({
+    elementID: elementID,
+    output: output,
+  });
 });
-
-// app.post("/submit", (req,res) => {
-//     let and = new And();
-//     let input1 = req.body.input1 === "true";
-//     let input2 = req.body.input2 === "true";
-//     and.update(input1,input2);
-//     res.render("index.ejs",{
-//         input1Initial: input1,
-//         input2Initial: input2,
-//         output: and.output
-//     });
-// });
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

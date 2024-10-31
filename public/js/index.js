@@ -9,8 +9,7 @@ $(document).ready(function () {
         input: $(this).attr("id"),
       }),
       success: function (response) {
-        console.log(response.output.toString());
-        $("#output").html(response.output.toString());
+        $(response.elementID).html(response.output.toString());
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);
