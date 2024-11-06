@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 
 import { And } from "./lib/and.js";
 import { Or } from "./lib/or.js";
+import { Xor } from "./lib/xor.js";
 
 const app = express();
 const port = 3000;
@@ -13,11 +14,18 @@ app.set("view engine", "ejs");
 
 let and = new And();
 let or = new Or();
+let xor = new Xor();
+let gates = {
+  and: and,
+  or: or,
+  xor: xor,
+};
 
 app.get("/", (req, res) => {
   res.render("index.ejs", {
     and: and,
     or: or,
+    xor: xor,
   });
 });
 
