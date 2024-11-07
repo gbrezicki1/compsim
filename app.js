@@ -63,6 +63,10 @@ app.post("/update", (req, res) => {
   });
 });
 
+function update_gate(gate, input) {
+if (input.toLowerCase().includes("input1")
+}
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
