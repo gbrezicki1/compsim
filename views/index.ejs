@@ -5,10 +5,10 @@
     <div class="col">
       <h2>And</h2>
       <label for="andInput1">Input 1:</label>
-      <input type="checkbox" id="_andInput1" class="input-checkbox"
+      <input type="checkbox" id="andInput1" class="input-checkbox"
       name="andInput1" value="true" <%= and.input1 ? 'checked' : '' %>> <br />
       <label for="andInput2">Input 2:</label>
-      <input type="checkbox" id="_andInput2" class="input-checkbox"
+      <input type="checkbox" id="andInput2" class="input-checkbox"
       name="andInput2" value="true" <%= and.input2 ? 'checked' : '' %>> <br />
       <p>Output:</p>
       <p id="andOutput"><%= and.output %></p>
@@ -16,13 +16,24 @@
     <div class="col">
       <h2>Or</h2>
       <label for="orInput1">Input 1:</label>
-      <input type="checkbox" id="_orInput1" class="input-checkbox"
+      <input type="checkbox" id="orInput1" class="input-checkbox"
       name="orInput1" value="true" <%= or.input1 ? 'checked' : '' %>> <br />
       <label for="orInput2">Input 2:</label>
-      <input type="checkbox" id="_orInput2" class="input-checkbox"
+      <input type="checkbox" id="orInput2" class="input-checkbox"
       name="orInput2" value="true" <%= or.input2 ? 'checked' : '' %>> <br />
       <p>Output:</p>
       <p id="orOutput"><%= or.output %></p>
+    </div>
+    <div class="col">
+      <h2>Xor</h2>
+      <label for="xorInput1">Input 1:</label>
+      <input type="checkbox" id="xorInput1" class="input-checkbox"
+      name="xorInput1" value="true" <%= xor.input1 ? 'checked' : '' %>> <br />
+      <label for="xorInput2">Input 2:</label>
+      <input type="checkbox" id="xorInput2" class="input-checkbox"
+      name="xorInput2" value="true" <%= xor.input2 ? 'checked' : '' %>> <br />
+      <p>Output:</p>
+      <p id="xorOutput"><%= xor.output %></p>
     </div>
   </div>
 </div>

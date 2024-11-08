@@ -15,11 +15,6 @@ app.set("view engine", "ejs");
 let and = new And();
 let or = new Or();
 let xor = new Xor();
-let gates = {
-  and: and,
-  or: or,
-  xor: xor,
-};
 
 app.get("/", (req, res) => {
   res.render("index.ejs", {
@@ -29,43 +24,30 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/update", (req, res) => {
-  let elementID;
-  let output;
-  if (req.body.input.toLowerCase().includes("and")) {
-    elementID = "#andOutput";
-    if (req.body.input.toLowerCase().includes("input1")) {
-      and.input1 = req.body.isChecked;
-    } else if (req.body.input.toLowerCase().includes("input2")) {
-      and.input2 = req.body.isChecked;
-    } else {
-      console.log(`Invalid input # for "and": ${req.body.input}`);
-    }
-    and.update();
-    output = and.output;
-  } else if (req.body.input.toLowerCase().includes("or")) {
-    elementID = "#orOutput";
-    if (req.body.input.toLowerCase().includes("input1")) {
-      or.input1 = req.body.isChecked;
-    } else if (req.body.input.toLowerCase().includes("input2")) {
-      or.input2 = req.body.isChecked;
-    } else {
-      console.log(`Invalid input # for "or": ${req.body.input}`);
-    }
-    or.update();
-    output = or.output;
+function update_gate(gate, input, value) {
+  if (input.toLowerCase().includes("input1")) {
+    gate.input1 = value;
   } else {
-    console.log("Invalid input ID.");
+    gate.input2 = value;
   }
+  gate.update();
+}
+
+app.post("/update", (req, res) => {
+  let gate;
+  if (req.body.input.toLowerCase().startsWith("and")) {
+    gate = and;
+  } else if (req.body.input.toLowerCase().startsWith("or")) {
+    gate = or;
+  } else {
+    gate = xor;
+  }
+  update_gate(gate, req.body.input, req.body.isChecked);
   res.json({
-    elementID: elementID,
-    output: output,
+    elementID: `#${gate.name}Output`,
+    output: gate.output,
   });
 });
-
-function update_gate(gate, input) {
-if (input.toLowerCase().includes("input1")
-}
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
