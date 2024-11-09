@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { And } from "./lib/and.js";
 import { Or } from "./lib/or.js";
 import { Xor } from "./lib/xor.js";
+import { Nand } from "./lib/nand.js";
 
 const app = express();
 const port = 3000;
@@ -15,12 +16,18 @@ app.set("view engine", "ejs");
 let and = new And();
 let or = new Or();
 let xor = new Xor();
+let nand = new Nand();
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", {
+  res.render("index.ejs");
+});
+
+app.get("/gates", (req, res) => {
+  res.render("gates.ejs", {
     and: and,
     or: or,
     xor: xor,
+    nand: nand,
   });
 });
 
@@ -39,6 +46,8 @@ app.post("/update", (req, res) => {
     gate = and;
   } else if (req.body.input.toLowerCase().startsWith("or")) {
     gate = or;
+  } else if (req.body.input.toLowerCase().startsWith("nand")) {
+    gate = nand;
   } else {
     gate = xor;
   }
