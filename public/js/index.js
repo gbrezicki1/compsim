@@ -22,11 +22,15 @@ $(document).ready(function () {
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({
-        highlow: $(this).val(),
+        currentColor: $(this).css("background-color"),
         inputID: $(this).attr("id"),
       }),
       success: function (response) {
-        $(response.elementID).html(response.output.toString());
+        $(this).css("background-color", response["newInputColor"]);
+        $("#one-bit-mem-cell-output").css(
+          "background-color",
+          reponse["newOutputColor"]
+        );
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);

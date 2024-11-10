@@ -6,7 +6,7 @@ import { Or } from "./lib/or.js";
 import { Xor } from "./lib/xor.js";
 import { Nand } from "./lib/nand.js";
 import { OneBitMemCell } from "./lib/oneBitMemCell.js";
-import {update_gate} from "./lib/utils.js";
+import { update_gate } from "./lib/utils.js";
 
 const app = express();
 const port = 3000;
@@ -19,7 +19,7 @@ let and = new And();
 let or = new Or();
 let xor = new Xor();
 let nand = new Nand();
-let oneBitMemCell = new OneBitMemCell(); 
+let oneBitMemCell = new OneBitMemCell();
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
@@ -53,12 +53,31 @@ app.post("/update_gates", (req, res) => {
 });
 
 app.get("/onebitmemcell", (req, res) => {
-  res.render("oneBitMemCell.ejs", {mem: oneBitMemCell})
+  res.render("oneBitMemCell.ejs", { mem: oneBitMemCell });
 });
 
-app.post("/update_onebitmemcell", (req,res) => {
-  pass;
-})
+app.post("/update_onebitmemcell", (req, res) => {
+  let value;
+  let newInputColor;
+  if (req.body["currentColor"] === "gray") {
+    value = true;
+    newInputColor = "green";
+  } else {
+    value = false;
+    newInputColor = "gray";
+  }
+  oneBitMemCell.update(req.body["inputID"], value);
+  let newOutputColor;
+  if (oneBitMemCell.output === true) {
+    newOutputColor = "green";
+  } else {
+    newOutputColor = "gray";
+  }
+  res.json({
+    newInputColor: newInputColor,
+    newOutputColor: newOutputColor,
+  });
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
