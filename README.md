@@ -1,1 +1,1 @@
-This is a simulation of a computer built up from logic gates.
+This is a web-based simulation of a computer built up from simulated logic gates.
