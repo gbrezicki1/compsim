@@ -5,6 +5,8 @@ import { And } from "./lib/and.js";
 import { Or } from "./lib/or.js";
 import { Xor } from "./lib/xor.js";
 import { Nand } from "./lib/nand.js";
+import { OneBitMemCell } from "./lib/oneBitMemCell.js";
+import {update_gate} from "./lib/utils.js";
 
 const app = express();
 const port = 3000;
@@ -17,6 +19,7 @@ let and = new And();
 let or = new Or();
 let xor = new Xor();
 let nand = new Nand();
+let oneBitMemCell = new OneBitMemCell(); 
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
@@ -31,16 +34,7 @@ app.get("/gates", (req, res) => {
   });
 });
 
-function update_gate(gate, input, value) {
-  if (input.toLowerCase().includes("input1")) {
-    gate.input1 = value;
-  } else {
-    gate.input2 = value;
-  }
-  gate.update();
-}
-
-app.post("/update", (req, res) => {
+app.post("/update_gates", (req, res) => {
   let gate;
   if (req.body.input.toLowerCase().startsWith("and")) {
     gate = and;
@@ -57,6 +51,14 @@ app.post("/update", (req, res) => {
     output: gate.output,
   });
 });
+
+app.get("/onebitmemcell", (req, res) => {
+  res.render("oneBitMemCell.ejs", {mem: oneBitMemCell})
+});
+
+app.post("/update_onebitmemcell", (req,res) => {
+  pass;
+})
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
