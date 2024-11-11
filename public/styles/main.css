@@ -1,0 +1,7 @@
+.color-box {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    border: 2px solid black;
+    cursor: pointer;
+  }

@@ -3,22 +3,23 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <label for="set">Set:</label>
-      <select name="set" id="set" class="one-bit-mem-cell-input">
-        <option value="low" <%= mem.set ? '' : 'selected' %>>Low</option>
-        <option value="high" <%= mem.set ? 'selected' : '' %>>High</option>
-      </select>
-      <br />
-      <label for="enable">Enable:</label>
-      <select name="enable" id="enable" class="one-bit-mem-cell-input">
-        <option value="low" <%= mem.enable ? '' : 'selected' %>>Low</option>
-        <option value="high" <%= mem.enable ? 'selected' : '' %>>High</option>
-      </select>
-      <br />
-      <p>Output:</p>
-      <p id="oneBitMemCellOutput"><%= mem.output %></p>
+      <p>Set</p>
+      <div class="one-bit-mem-cell-input color-box" id="set"></div>
+    </div>
+    <div class="col">
+      <p>Output</p>
+      <div class="color-box" id="one-bit-mem-cell-output"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>Enable</p>
+      <div class="one-bit-mem-cell-input color-box" id="enable"></div>
     </div>
   </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js" charset="utf-8"></script>
+<!-- <script src="/js/updateOneBitMemCell.js" charset="utf-8"></script> -->
 
 <%- include('partials/footer') %>

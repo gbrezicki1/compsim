@@ -16,7 +16,8 @@ $(document).ready(function () {
       },
     });
   });
-  $(".one-bit-mem-cell-input").on("change", function () {
+  $(".one-bit-mem-cell-input").click(function () {
+    console.log("clicked!");
     $.ajax({
       url: "/update_onebitmemcell",
       type: "POST",
@@ -29,7 +30,7 @@ $(document).ready(function () {
         $(this).css("background-color", response["newInputColor"]);
         $("#one-bit-mem-cell-output").css(
           "background-color",
-          reponse["newOutputColor"]
+          response["newOutputColor"]
         );
       },
       error: function (xhr, status, error) {

@@ -57,6 +57,7 @@ app.get("/onebitmemcell", (req, res) => {
 });
 
 app.post("/update_onebitmemcell", (req, res) => {
+  console.log("Hello from the backend!");
   let value;
   let newInputColor;
   if (req.body["currentColor"] === "gray") {
