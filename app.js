@@ -52,15 +52,29 @@ app.post("/update_gates", (req, res) => {
   });
 });
 
+function setColor(ioName) {
+  let color;
+  if (oneBitMemCell[ioName]) {
+    color = "green";
+  } else {
+    color = "gray";
+  }
+  return color;
+}
+
 app.get("/onebitmemcell", (req, res) => {
-  res.render("oneBitMemCell.ejs", { mem: oneBitMemCell });
+  let colors = {};
+  colors["set"] = setColor("set");
+  colors["enable"] = setColor("enable");
+  colors["output"] = setColor("output");
+  res.render("oneBitMemCell.ejs", { mem: oneBitMemCell, colors: colors });
 });
 
 app.post("/update_onebitmemcell", (req, res) => {
-  console.log("Hello from the backend!");
   let value;
   let newInputColor;
-  if (req.body["currentColor"] === "gray") {
+  let green = "rgb(128, 128, 128)";
+  if (req.body["currentColor"] === green) {
     value = true;
     newInputColor = "green";
   } else {

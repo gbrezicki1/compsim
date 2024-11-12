@@ -4,22 +4,33 @@
   <div class="row">
     <div class="col">
       <p>Set</p>
-      <div class="one-bit-mem-cell-input color-box" id="set"></div>
+      <div
+        class="one-bit-mem-cell-input color-box"
+        id="set"
+        style="background-color: <%= colors[ 'set'] %>"
+      ></div>
     </div>
     <div class="col">
       <p>Output</p>
-      <div class="color-box" id="one-bit-mem-cell-output"></div>
+      <div
+        class="color-box"
+        id="one-bit-mem-cell-output"
+        style="background-color: <%= colors[ 'enable'] %>"
+      ></div>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <p>Enable</p>
-      <div class="one-bit-mem-cell-input color-box" id="enable"></div>
+      <div
+        class="one-bit-mem-cell-input color-box"
+        id="enable"
+        style="background-color: <%= colors[ 'output'] %>"
+      ></div>
     </div>
   </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/index.js" charset="utf-8"></script>
-<!-- <script src="/js/updateOneBitMemCell.js" charset="utf-8"></script> -->
+<script src="/js/oneBitMemCell.js" charset="utf-8"></script>
 
 <%- include('partials/footer') %>
