@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  console.log(<%= cell.numBits %>)
+  <% for (let i=0; i<cell.numBits; i++) { %>
+    <% 
+      let color;
+      if (cell.input[i] === 0) {
+        color = "gray";
+      } else {
+        color = "green";
+      }
+    %>
+     <div
+      class="bitbox"
+      style="background-color: '<%= color %>'"
+      id="<%= `bit${i}` %>"
+     >
+      <%= cell.input[i] %>
+    </div> 
+  <% } %>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="/js/memCell8Bit.js" charset="utf-8"></script> -->
+
+<%- include('partials/footer') %>

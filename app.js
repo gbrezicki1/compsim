@@ -7,6 +7,7 @@ import { Xor } from "./lib/xor.js";
 import { Nand } from "./lib/nand.js";
 import { OneBitMemCell } from "./lib/oneBitMemCell.js";
 import { update_gate } from "./lib/utils.js";
+import { MemCell8Bit } from "./lib/memCell8Bit.js";
 
 const app = express();
 const port = 3000;
@@ -20,6 +21,7 @@ let or = new Or();
 let xor = new Xor();
 let nand = new Nand();
 let oneBitMemCell = new OneBitMemCell();
+let memCell8Bit = new MemCell8Bit();
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
@@ -93,6 +95,10 @@ app.post("/update_onebitmemcell", (req, res) => {
     newOutputColor: newOutputColor,
   });
 });
+
+app.get("/memCell8Bit", (req,res) => {
+  res.render("memCell8Bit.ejs", {cell: memCell8Bit});
+})
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
