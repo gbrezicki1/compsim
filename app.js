@@ -8,6 +8,7 @@ import { Nand } from "./lib/nand.js";
 import { OneBitMemCell } from "./lib/oneBitMemCell.js";
 import { update_gate } from "./lib/utils.js";
 import { MemCell8Bit } from "./lib/memCell8Bit.js";
+import { colorFromBitValue } from "./lib/utils.js";
 
 const app = express();
 const port = 3000;
@@ -96,9 +97,12 @@ app.post("/update_onebitmemcell", (req, res) => {
   });
 });
 
-app.get("/memCell8Bit", (req,res) => {
-  res.render("memCell8Bit.ejs", {cell: memCell8Bit});
-})
+app.get("/memCell8Bit", (req, res) => {
+  res.render("memCell8Bit.ejs", {
+    cell: memCell8Bit,
+    colorFromBitValue: colorFromBitValue,
+  });
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

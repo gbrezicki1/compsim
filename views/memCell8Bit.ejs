@@ -1,24 +1,52 @@
 <%- include('partials/header') %>
 
 <div class="container">
-  console.log(<%= cell.numBits %>)
-  <% for (let i=0; i<cell.numBits; i++) { %>
-    <% 
-      let color;
-      if (cell.input[i] === 0) {
-        color = "gray";
-      } else {
-        color = "green";
-      }
-    %>
-     <div
-      class="bitbox"
-      style="background-color: '<%= color %>'"
-      id="<%= `bit${i}` %>"
-     >
-      <%= cell.input[i] %>
-    </div> 
-  <% } %>
+  <div class="row">
+    <div class="col">
+      <label for="set">Set:</label>
+    </div>
+    <div class="col" style="display: flex;">
+      <div
+        class="bitbox"
+        style="background-color: <%= colorFromBitValue(cell.set) %>"
+        id="set"
+      >
+        <%= cell.set%>
+      </div> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="inputBit0">Input:</label>
+    </div>
+    <div class="col" style="display: flex;">
+      <% for (let i=0; i<cell.numBits; i++) { %>
+        <div
+          class="bitbox"
+          style="background-color: <%= colorFromBitValue(cell.input[i])%>"
+          id="<%= `inputBit${i}` %>"
+        >
+          <%= cell.input[i] %>
+        </div> 
+      <% } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="outputBit0">Output:</label>
+    </div>
+    <div class="col" style="display: flex;">
+      <% for (let i=0; i<cell.numBits; i++) { %>
+        <div
+          class="bitbox"
+          style="background-color: <%= colorFromBitValue(cell.output[i])%>"
+            id="<%= `outputBit${i}` %>"
+        >
+          <%= cell.output[i] %>
+        </div> 
+      <% } %>
+    </div>
+  </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- <script src="/js/memCell8Bit.js" charset="utf-8"></script> -->
