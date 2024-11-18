@@ -104,6 +104,10 @@ app.get("/memCell8Bit", (req, res) => {
   });
 });
 
+app.post("/update_memcell8bit", (req, res) => {
+  memCell8Bit.
+})
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

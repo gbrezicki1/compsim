@@ -2,27 +2,27 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col label-col">
       <label for="set">Set:</label>
     </div>
     <div class="col" style="display: flex;">
       <div
-        class="bitbox"
+        class="bitbox input-bit"
         style="background-color: <%= colorFromBitValue(cell.set) %>"
-        id="set"
+        id="setBit"
       >
         <%= cell.set%>
       </div> 
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col label-col"> 
       <label for="inputBit0">Input:</label>
     </div>
     <div class="col" style="display: flex;">
       <% for (let i=0; i<cell.numBits; i++) { %>
         <div
-          class="bitbox"
+          class="bitbox input-bit"
           style="background-color: <%= colorFromBitValue(cell.input[i])%>"
           id="<%= `inputBit${i}` %>"
         >
@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col label-col">
       <label for="outputBit0">Output:</label>
     </div>
     <div class="col" style="display: flex;">
