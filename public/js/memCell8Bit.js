@@ -1,5 +1,8 @@
+import { colorFromBitValue } from "./utils.js";
+
 $(".input-bit").click(function () {
   const box = $(this);
+  console.log(box.innerHTML);
   $.ajax({
     url: "/update_memcell8bit",
     type: "POST",
@@ -9,13 +12,12 @@ $(".input-bit").click(function () {
       boxID: box.attr("id"),
     }),
     success: function (response) {
-      box.css("background-color", response["newInputColor"]);
-      box.innerHTML(response["newInputValue"]);
-
+      box.innerHTML = response["newInputValue"];
+      box.css("background-color", colorFromBitValue(response["newInputValue"]));
       for (let i = 0; i < response.numBits; i++) {
         $(`#outputBit${i}`).css(
           "background-color",
-          response["newOutputColor"][i]
+          colorFromBitValue(response["newOutputValue"][i])
         );
         $(`#outputBit${i}`).innerHTML(response["newOutputValue"][i]);
       }

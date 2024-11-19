@@ -9,6 +9,7 @@ import { OneBitMemCell } from "./lib/oneBitMemCell.js";
 import { update_gate } from "./lib/utils.js";
 import { MemCell8Bit } from "./lib/memCell8Bit.js";
 import { colorFromBitValue } from "./lib/utils.js";
+import { toggleBit } from "./lib/utils.js";
 
 const app = express();
 const port = 3000;
@@ -105,8 +106,19 @@ app.get("/memCell8Bit", (req, res) => {
 });
 
 app.post("/update_memcell8bit", (req, res) => {
-  memCell8Bit.
-})
+  let newInputValue = toggleBit(req.body["currentValue"]);
+  if (req.body["boxID"] === "setBit") {
+    memCell8Bit.updateSet(newInputValue);
+  } else {
+    const boxID = req.body["boxID"]
+    const bitNum = parseInt(boxID.replace(/\D/g, ""), 10); 
+    updatedInput = memCell8Bit.input;
+    updateInput[bitNum] = newInputValue;
+    memCell8Bit.updateInput(newInputValue);
+  }
+  let newOutputValue = memCell8Bit.output;
+  res.json({newInputValue: newInputValue, newOutputValue: newOutputValue})
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
