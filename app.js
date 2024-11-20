@@ -8,8 +8,8 @@ import { Nand } from "./lib/nand.js";
 import { OneBitMemCell } from "./lib/oneBitMemCell.js";
 import { update_gate } from "./lib/utils.js";
 import { MemCell8Bit } from "./lib/memCell8Bit.js";
-import { colorFromBitValue } from "./lib/utils.js";
 import { toggleBit } from "./lib/utils.js";
+import { colorFromBitValue } from "./public/js/utils.js";
 
 const app = express();
 const port = 3000;
@@ -106,18 +106,24 @@ app.get("/memCell8Bit", (req, res) => {
 });
 
 app.post("/update_memcell8bit", (req, res) => {
-  let newInputValue = toggleBit(req.body["currentValue"]);
+  let newSetOrInputValue;
   if (req.body["boxID"] === "setBit") {
-    memCell8Bit.updateSet(newInputValue);
+    newSetOrInputValue = toggleBit(memCell8Bit.set);
+    memCell8Bit.updateSet(newSetOrInputValue);
   } else {
-    const boxID = req.body["boxID"]
-    const bitNum = parseInt(boxID.replace(/\D/g, ""), 10); 
-    updatedInput = memCell8Bit.input;
-    updateInput[bitNum] = newInputValue;
-    memCell8Bit.updateInput(newInputValue);
+    const boxID = req.body["boxID"];
+    const bitNum = parseInt(boxID.replace(/\D/g, ""), 10);
+    newSetOrInputValue = toggleBit(memCell8Bit.input[bitNum]);
+    let new8BitInputValue = memCell8Bit.input.slice();
+    new8BitInputValue[bitNum] = newSetOrInputValue;
+    memCell8Bit.updateInput(new8BitInputValue);
   }
   let newOutputValue = memCell8Bit.output;
-  res.json({newInputValue: newInputValue, newOutputValue: newOutputValue})
+  res.json({
+    newSetOrInputValue: newSetOrInputValue,
+    newOutputValue: newOutputValue,
+    numBits: memCell8Bit.numBits,
+  });
 });
 
 app.listen(port, () => {

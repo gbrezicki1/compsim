@@ -2,24 +2,26 @@ import { colorFromBitValue } from "./utils.js";
 
 $(".input-bit").click(function () {
   const box = $(this);
-  console.log(box.innerHTML);
   $.ajax({
     url: "/update_memcell8bit",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({
-      currentValue: box.innerHTML,
       boxID: box.attr("id"),
     }),
     success: function (response) {
-      box.innerHTML = response["newInputValue"];
-      box.css("background-color", colorFromBitValue(response["newInputValue"]));
+      box.html(response["newSetOrInputValue"]);
+      box.css(
+        "background-color",
+        colorFromBitValue(response["newSetOrInputValue"])
+      );
       for (let i = 0; i < response.numBits; i++) {
         $(`#outputBit${i}`).css(
           "background-color",
           colorFromBitValue(response["newOutputValue"][i])
         );
-        $(`#outputBit${i}`).innerHTML(response["newOutputValue"][i]);
+        $(`#outputBit${i}`).html(response["newOutputValue"][i]);
+        console.log(`#outputBit${i}`);
       }
     },
     error: function (xhr, status, error) {
