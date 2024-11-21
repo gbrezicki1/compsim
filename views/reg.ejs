@@ -1,0 +1,81 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col label-col">
+      <label for="set">Set:</label>
+    </div>
+    <div class="col" style="display: flex;">
+      <div
+        class="bitbox input-bit"
+        style="background-color: <%= colorFromBitValue(reg.set) %>"
+        id="setBit"
+      >
+        <%= reg.set %>
+      </div> 
+      <label for="enableBit" style="margin-left: 20px; margin-right: 20px;">
+        Enable:
+      </label>
+      <div
+        class="bitbox input-bit"
+        style="background-color: <%= colorFromBitValue(reg.enable) %>"
+        id="enableBit"
+      >
+        <%= reg.set %>
+      </div> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col label-col"> 
+      <label for="inputBit0">Input:</label>
+    </div>
+    <div class="col" style="display: flex;">
+      <% for (let i=0; i<reg.numBits; i++) { %>
+        <div
+          class="bitbox input-bit"
+          style="background-color: <%= colorFromBitValue(reg.input[i])%>"
+          id="<%= `inputBit${i}` %>"
+        >
+          <%= reg.input[i] %>
+        </div> 
+      <% } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col label-col"> 
+      <label for="memCellOutputBit0">Mem cell output:</label>
+    </div>
+    <div class="col" style="display: flex;">
+      <% for (let i=0; i<reg.numBits; i++) { %>
+        <% let color = colorFromBitValue(reg.memCellMultiBit.output[i]); %>
+        <div
+          class="bitbox input-bit"
+          style="background-color: <%= color %>"
+          id="<%= `memCellOutputBit${i}` %>"
+        >
+          <%= reg.memCellMultiBit.output[i] %>
+        </div> 
+      <% } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col label-col">
+      <label for="outputBit0">Output:</label>
+    </div>
+    <div class="col" style="display: flex;">
+      <% for (let i=0; i<reg.numBits; i++) { %>
+        <div
+          class="bitbox"
+          style="background-color: <%= colorFromBitValue(reg.output[i])%>"
+            id="<%= `outputBit${i}` %>"
+        >
+          <%= reg.output[i] %>
+        </div> 
+      <% } %>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script type="module" src="/js/reg.js" charset="utf-8"></script> -->
+
+<%- include('partials/footer') %>

@@ -1,10 +1,10 @@
 
 export function colorFromBitValue(bitValue) {
-  let color;
   if (bitValue === 0) {
-    color = "gray";
+    return "gray";
+  } else if (bitValue === 1 ) {
+    return "green";
   } else {
-    color = "green";
+    return "blue"
   }
-  return color;
 }
