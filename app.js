@@ -132,6 +132,29 @@ app.get("/reg", (req, res) => {
   res.render("reg.ejs", { reg: reg, colorFromBitValue: colorFromBitValue });
 });
 
+app.post("/update_reg", (req, res) => {
+  let newValue;
+  if (req.body.boxID === "setBit") {
+    reg.updateSet(toggleBit(reg.set));
+    newValue = reg.set;
+  } else if (req.body.boxID === "enableBit") {
+    reg.updateEnable(toggleBit(reg.enable));
+    newValue = reg.enable;
+  } else {
+    let newInput = reg.input.slice();
+    let bitNum = parseInt(req.body.boxID.replace(/\D/g, ""), 10);
+    newInput[bitNum] = toggleBit(reg.input[bitNum]);
+    reg.updateInput(newInput);
+    newValue = newInput[bitNum];
+  }
+  res.json({
+    newValue: newValue,
+    newMemCellOutputValue: reg.memCellMultiBit.output,
+    newOutputValue: reg.output,
+    numBits: reg.numBits
+  });
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
