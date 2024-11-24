@@ -11,6 +11,7 @@ import { MemCell8Bit } from "./lib/memCell8Bit.js";
 import { toggleBit } from "./lib/utils.js";
 import { colorFromBitValue } from "./public/js/utils.js";
 import { RegMultiBit } from "./lib/regMultiBit.js";
+import { Ram16 } from "./lib/ram16.js";
 
 const app = express();
 const port = 3000;
@@ -26,6 +27,7 @@ let nand = new Nand();
 let oneBitMemCell = new OneBitMemCell();
 let memCell8Bit = new MemCell8Bit();
 let reg = new RegMultiBit(8);
+let ram = new Ram16(8);
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
@@ -154,6 +156,10 @@ app.post("/update_reg", (req, res) => {
     numBits: reg.numBits
   });
 });
+
+app.get("/ram16", (req,res) => {
+  res.render("ram16.ejs", {ram: ram, colorFromBitValue:colorFromBitValue});
+})
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

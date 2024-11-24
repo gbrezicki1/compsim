@@ -1,3 +1,7 @@
+/* div {
+    outline: 1px solid red !important;
+} */
+
 .color-box {
     width: 100px;
     height: 100px;
@@ -21,4 +25,17 @@
   .label-col {
     display: flex;
     justify-content: right; 
+  }
+  .bitbox-label {
+    margin-left: 25px;
+    margin-right: 10px;
+  }
+  .ram-register {
+    display: grid;
+    border: 5px solid black;
+    background-color: lightskyblue;
+    height: 100px;
+    width: 180px;
+    place-items: center;
+    /* justify-content: center; */
   }

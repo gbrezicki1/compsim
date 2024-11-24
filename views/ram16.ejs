@@ -1,0 +1,107 @@
+<%- include('partials/header') %>
+
+<div class="container" style="margin-top: 50px;">
+  <div class="row" style="margin: 10px;">
+    <div class="col" style="display: flex;">
+      <label for="addrSet" class="bitbox-label">Addr set:</label>
+      <div
+        class="bitbox input-bit"
+        style="background-color: <%= colorFromBitValue(ram.addrSet) %>"
+        id="addrSet"
+      >
+        <%= ram.addrSet %>
+      </div> 
+      <label for="write" class="bitbox-label">Write:</label>
+      <div
+        class="bitbox input-bit"
+        style="background-color: <%= colorFromBitValue(ram.write) %>"
+        id="write"
+      >
+        <%= ram.write %>
+      </div> 
+      <label for="read" class="bitbox-label">Read:</label>
+      <div
+        class="bitbox input-bit"
+        style="background-color: <%= colorFromBitValue(ram.read) %>"
+        id="read"
+      >
+        <%= ram.read %>
+      </div> 
+      <label for="reset" class="bitbox-label">Reset:</label>
+      <div
+        class="bitbox input-bit"
+        style="background-color: <%= colorFromBitValue(ram.reset) %>"
+        id="reset"
+      >
+        <%= ram.reset %>
+      </div> 
+    </div>
+  </div>
+  <div class="row" style="margin: 10px;">
+    <div class="col" style="display: flex;">
+      <label for="addrBit0" class="bitbox-label">Addr:</label>
+      <% for (let i=0; i<ram.numBits; i++) { %>
+        <div
+          class="bitbox input-bit"
+          style="background-color: <%= colorFromBitValue(ram.addr[i])%>"
+          id="<%= `addrBit${i}` %>"
+        >
+          <%= ram.addr[i] %>
+        </div> 
+      <% } %>
+      <label for="inputBit0" class="bitbox-label">Input:</label>
+      <% for (let i=0; i<ram.numBits; i++) { %>
+        <div
+          class="bitbox input-bit"
+          style="background-color: <%= colorFromBitValue(ram.input[i])%>"
+          id="<%= `inputBit${i}` %>"
+        >
+          <%= ram.input[i] %>
+        </div> 
+      <% } %>
+      <label for="outputBit0" class="bitbox-label">Output:</label>
+      <% for (let i=0; i<ram.numBits; i++) { %>
+        <div
+          class="bitbox"
+          style="background-color: <%= colorFromBitValue(ram.output[i])%>"
+          id="<%= `outputBit${i}` %>"
+        >
+          <%= ram.output[i] %>
+        </div> 
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="margin-top: 50px;">
+  <% let rows = ram.decoderRow.output.length; %>
+  <% let cols = ram.decoderCol.output.length; %>
+  <% for (let row=0; row<rows; row++) { %>
+    <div class="row" style="display: flex; margin: 20px;">
+      <% for (let col=0; col<cols; col++) { %>
+        <div class="col">
+          <div class="ram-register">
+            <% let memCell = ram.registers[row][col].reg.memCellMultiBit; %>
+            <p>Row <%= row %>, Col <%= col %></p>
+            <div style="display: flex;">
+              <% for (let bit=0; bit<ram.numBits; bit++) { %>
+                <div
+                  class="bitbox"
+                  style="background-color: <%= colorFromBitValue(memCell.output[bit])%>"
+                  id="<%= `memCell.output${bit}` %>"
+                >
+                  <%= memCell.output[bit] %>
+                </div> 
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% } %> 
+    </div>
+  <% } %>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script type="module" src="/js/reg.js" charset="utf-8"></script> -->
+
+<%- include('partials/footer') %>
