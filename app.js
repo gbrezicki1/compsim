@@ -161,6 +161,23 @@ app.get("/ram16", (req,res) => {
   res.render("ram16.ejs", {ram: ram, colorFromBitValue:colorFromBitValue});
 })
 
+app.post("/update_ram16", (req,res) => {
+  boxID = req.body["boxID"];
+  if (boxID.split(".").length-1 === 0) {
+    ram[boxID] = toggleBit(ram[boxID]);
+  }
+  if (boxID.split(".").length-1 === 1) {
+    let attr = boxID.split(".")[0];
+    let bitNum = boxID.split(".")[1];
+    ram[attr][bitNum] = toggleBit(ram[attr][bitNum]);
+  }
+  if (boxID.split(".").length-1 === 3) {
+    let row = boxID.split(".")[1];
+    let col = boxID.split(".")[2];
+    let bitNum = boxID.split(".")[3];
+  }
+})
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

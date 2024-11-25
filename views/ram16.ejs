@@ -39,32 +39,32 @@
   </div>
   <div class="row" style="margin: 10px;">
     <div class="col" style="display: flex;">
-      <label for="addrBit0" class="bitbox-label">Addr:</label>
+      <label for="addr.0" class="bitbox-label">Addr:</label>
       <% for (let i=0; i<ram.numBits; i++) { %>
         <div
           class="bitbox input-bit"
           style="background-color: <%= colorFromBitValue(ram.addr[i])%>"
-          id="<%= `addrBit${i}` %>"
+          id="<%= `addr.${i}` %>"
         >
           <%= ram.addr[i] %>
         </div> 
       <% } %>
-      <label for="inputBit0" class="bitbox-label">Input:</label>
+      <label for="input.0" class="bitbox-label">Input:</label>
       <% for (let i=0; i<ram.numBits; i++) { %>
         <div
           class="bitbox input-bit"
           style="background-color: <%= colorFromBitValue(ram.input[i])%>"
-          id="<%= `inputBit${i}` %>"
+          id="<%= `input.${i}` %>"
         >
           <%= ram.input[i] %>
         </div> 
       <% } %>
-      <label for="outputBit0" class="bitbox-label">Output:</label>
+      <label for="output.0" class="bitbox-label">Output:</label>
       <% for (let i=0; i<ram.numBits; i++) { %>
         <div
           class="bitbox"
           style="background-color: <%= colorFromBitValue(ram.output[i])%>"
-          id="<%= `outputBit${i}` %>"
+          id="<%= `output.${i}` %>"
         >
           <%= ram.output[i] %>
         </div> 
@@ -74,11 +74,9 @@
 </div>
 
 <div class="container" style="margin-top: 50px;">
-  <% let rows = ram.decoderRow.output.length; %>
-  <% let cols = ram.decoderCol.output.length; %>
-  <% for (let row=0; row<rows; row++) { %>
+  <% for (let row=0; row<ram.numRows; row++) { %>
     <div class="row" style="display: flex; margin: 20px;">
-      <% for (let col=0; col<cols; col++) { %>
+      <% for (let col=0; col<ram.numCols; col++) { %>
         <div class="col">
           <div class="ram-register">
             <% let memCell = ram.registers[row][col].reg.memCellMultiBit; %>
@@ -88,7 +86,7 @@
                 <div
                   class="bitbox"
                   style="background-color: <%= colorFromBitValue(memCell.output[bit])%>"
-                  id="<%= `memCell.output${bit}` %>"
+                  id="<%= `memCell.${row}.${col}.${bit}` %>"
                 >
                   <%= memCell.output[bit] %>
                 </div> 
